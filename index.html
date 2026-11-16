@@ -1130,7 +1130,7 @@
             <a href="https://www.instagram.com/freelancer.hanif/" target="_blank" rel="noopener" aria-label="Instagram profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#F9CE34"/><stop offset=".5" stop-color="#EE2A7B"/><stop offset="1" stop-color="#6228D7"/></linearGradient></defs><rect width="24" height="24" rx="5" fill="url(#igg)"/><rect x="6" y="6" width="12" height="12" rx="3.6" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="15.6" cy="8.4" r=".9" fill="#fff"/></svg>Instagram</span><span class="arr" aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <form class="cform" id="cform" action="https://formsubmit.co/thehanifmohammad@gmail.com" method="POST" novalidate>
+        <form class="cform" id="cform" action="https://formsubmit.co/76a64b78fdd1934cc1b527df7a688e63" method="POST" novalidate>
           <div class="cform-head"><span class="label">Send a message</span><span class="cform-sub">Tell me about your app — I reply within a day.</span></div>
           <input type="hidden" name="_subject" value="New enquiry from hanif-2000.github.io">
           <input type="hidden" name="_template" value="table">
@@ -1406,13 +1406,16 @@
       if (f.elements._honey.value) return;
       btn.disabled = true; say('Sending…');
       var data = new FormData(f); data.append('_replyto', f.elements.email.value.trim());
-      fetch('https://formsubmit.co/ajax/thehanifmohammad@gmail.com', { method: 'POST', headers: { 'Accept': 'application/json' }, body: data })
-        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      fetch('https://formsubmit.co/ajax/76a64b78fdd1934cc1b527df7a688e63', { method: 'POST', headers: { 'Accept': 'application/json' }, body: data })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, status: r.status, j: j }; }); })
         .then(function (res) {
-          if (res.ok && String(res.j.success) === 'true') { f.reset(); say('Thanks! Your message is on its way — I’ll reply within a day.', 'ok'); }
-          else throw new Error((res.j && res.j.message) || 'send failed');
+          if (res.ok && String(res.j.success) === 'true') { f.reset(); say('Thanks! Your message is on its way — I’ll reply within a day.', 'ok'); return; }
+          var m = (res.j && res.j.message) || '';
+          if (window.console) console.warn('Contact form:', m || ('HTTP ' + res.status));
+          if (/activat/i.test(m)) { say('The form is being set up — please email thehanifmohammad@gmail.com for now.', 'err'); return; }
+          throw new Error(m || 'send failed');
         })
-        .catch(function () { say('Couldn’t send right now. Please email thehanifmohammad@gmail.com instead.', 'err'); })
+        .catch(function (err) { if (window.console && err) console.warn('Contact form error:', err.message || err); say('Couldn’t send right now. Please email thehanifmohammad@gmail.com instead.', 'err'); })
         .then(function () { btn.disabled = false; });
     });
   })();
