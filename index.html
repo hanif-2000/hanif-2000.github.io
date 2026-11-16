@@ -436,6 +436,21 @@
 
   .reveal { transition-delay: var(--d, 0s); }
   @media (prefers-reduced-motion: reduce) { .hero-bg span { animation: none; } .tilt, .photo-3d { transform: none !important; } }
+  /* hero composition: photo right, phone bottom-left, badge top-right */
+  .hero-photo { padding: 0 0 0 48px; }
+  .photo-3d .photo-card { transform: none; }
+  .phone { left: -48px; bottom: -28px; width: 112px; border-radius: 20px; padding: 5px; transform: translateZ(90px) rotate(-4deg); }
+  .phone-screen { border-radius: 15px; }
+  .phone-notch { top: 9px; width: 36px; height: 10px; margin-left: -18px; }
+  .phone-label { left: -40px; bottom: -64px; }
+  .photo-badge { left: auto; top: auto; right: -18px; bottom: 26px; }
+  @media (max-width: 880px) {
+    .hero-photo { padding: 0 0 0 36px; max-width: 340px; margin-bottom: 30px; }
+    .phone { left: -36px; bottom: -20px; width: 88px; border-radius: 16px; padding: 4px; }
+    .phone-screen { border-radius: 12px; }
+    .phone-label { display: none; }
+    .photo-badge { right: -6px; bottom: 16px; }
+  }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Hanif Mohammad","jobTitle":"Senior React & React Native Developer","url":"https://hanif-2000.github.io/","image":"https://hanif-2000.github.io/assets/hanif.jpg","email":"mailto:thehanifmohammad@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Jaipur","addressCountry":"IN"},"alumniOf":"Himalayan Garhwal University","knowsAbout":["React Native","React","Next.js","TypeScript","Node.js","Firebase"],"sameAs":["https://www.upwork.com/freelancers/~01b46f78c173c3ba9b","https://www.linkedin.com/in/hanif-mohammad-385a051b7","https://github.com/hanif-2000","https://www.instagram.com/freelancer.hanif/"]}
