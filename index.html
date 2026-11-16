@@ -104,6 +104,10 @@
   .nav-links { display: flex; gap: clamp(.9rem, 2.6vw, 2rem); align-items: center; }
   .nav-links a { text-decoration: none; font-size: .88rem; color: var(--ink-2); transition: color .15s ease; }
   .nav-links a:hover { color: var(--accent); }
+  .nav-links a.menu-link { position: relative; }
+  .nav-links a.menu-link.active { color: var(--accent-ink); font-weight: 600; }
+  .nav-links a.menu-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transition: transform .2s ease; }
+  .nav-links a.menu-link.active::after { transform: scaleX(1); }
   .nav-cta { padding: .5rem .95rem; border-radius: var(--radius); background: var(--btn-bg); color: var(--btn-ink) !important; font-weight: 500; }
   .nav-cta:hover { background: var(--accent); }
   @media (max-width: 720px) { .nav-links a.menu-link { display: none; } }
@@ -1263,6 +1267,22 @@
       window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
       if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
     });
+  })();
+  (function () {
+    var links = {}; document.querySelectorAll('.nav-links a.menu-link').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    var secs = Object.keys(links).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    if (!secs.length) return;
+    function update() {
+      var line = window.innerHeight * 0.35, cur = null;
+      secs.forEach(function (sec) { if (sec.getBoundingClientRect().top <= line) cur = sec.id; });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = null;
+      Object.keys(links).forEach(function (id) {
+        var on = id === cur; links[id].classList.toggle('active', on);
+        if (on) links[id].setAttribute('aria-current', 'location'); else links[id].removeAttribute('aria-current');
+      });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update); update();
   })();
 </script>
 </body>
