@@ -366,6 +366,13 @@
   .copy-btn:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.35); }
   .copy-btn.done { color: #7FE070; border-color: #7FE070; }
   .tz { margin: 1rem 0 0; font-size: .88rem; color: #A9B5A4; }
+  .tzw { margin-top: 1.2rem; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: .9rem 1rem; max-width: 420px; }
+  .tz-row { display: grid; grid-template-columns: 5.5rem auto 1fr; gap: .8rem; align-items: baseline; padding: .2rem 0; }
+  .tz-k { font-size: .78rem; color: #A9B5A4; }
+  .tz-v { font-size: 1.15rem; font-weight: 700; color: #F3F1EC; font-variant-numeric: tabular-nums; }
+  .tz-z { font-size: .78rem; color: #A9B5A4; }
+  .tz-note { margin: .55rem 0 0; font-size: .82rem; color: #CFE6C9; }
+  .tz-note b { color: #7FE070; }
   .contact-side { display: grid; gap: 1.4rem; align-self: stretch; align-content: space-between; }
   .upwork-btn { display: flex; justify-content: space-between; align-items: center; gap: 1rem; text-decoration: none; background: #0E7A00; color: #fff; border-radius: var(--radius); padding: 1rem 1.2rem; font-size: 1.2rem; transition: background .15s ease, transform .15s ease; }
   .upwork-btn:hover { background: #0D7300; transform: translateY(-2px); }
@@ -1032,7 +1039,11 @@
             <a class="mail-link" href="mailto:thehanifmohammad@gmail.com">thehanifmohammad@gmail.com</a>
             <button type="button" class="copy-btn" data-copy="thehanifmohammad@gmail.com" aria-label="Copy email address">Copy</button>
           </div>
-          <p class="tz">Jaipur, India · IST (UTC+5:30)</p>
+          <div class="tzw" id="tzw" aria-live="polite">
+            <div class="tz-row"><span class="tz-k">My time</span><span class="tz-v" id="tzMe">—</span><span class="tz-z">Jaipur · IST</span></div>
+            <div class="tz-row" id="tzYouRow"><span class="tz-k">Your time</span><span class="tz-v" id="tzYou">—</span><span class="tz-z" id="tzYouZ"></span></div>
+            <p class="tz-note" id="tzNote">I usually work 10:00 – 22:00 IST and reply within the same day.</p>
+          </div>
         </div>
         <div class="contact-side">
           <a class="upwork-btn" href="https://www.upwork.com/freelancers/~01b46f78c173c3ba9b" target="_blank" rel="noopener">
@@ -1186,6 +1197,35 @@
       if (name) name.textContent = imgs[i].getAttribute('data-app');
       if (dot) dot.style.background = imgs[i].getAttribute('data-c');
     }, 2600);
+  })();
+  (function () {
+    var me = document.getElementById('tzMe'); if (!me) return;
+    var you = document.getElementById('tzYou'), youZ = document.getElementById('tzYouZ'), row = document.getElementById('tzYouRow'), note = document.getElementById('tzNote');
+    var HOME = 'Asia/Kolkata', START = 10, END = 22; // working hours in IST
+    var userTZ; try { userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
+    var fmt = function (tz) { return new Intl.DateTimeFormat([], { hour: 'numeric', minute: '2-digit', timeZone: tz }).format(new Date()); };
+    var hourIn = function (tz, d) { return +new Intl.DateTimeFormat('en-GB', { hour: '2-digit', hour12: false, timeZone: tz }).format(d); };
+    var sameZone = !userTZ || new Date().toLocaleString('en-US', { timeZone: userTZ }) === new Date().toLocaleString('en-US', { timeZone: HOME });
+    function windowInYourTime() {
+      // find the IST 10:00 and 22:00 instants today and render them in the visitor zone
+      var now = new Date(), parts = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: HOME }).format(now).split(':');
+      var base = new Date(now.getTime() - ((+parts[0] % 24) * 60 + (+parts[1])) * 60000 - now.getSeconds() * 1000 - now.getMilliseconds());
+      var f = new Intl.DateTimeFormat([], { hour: 'numeric', minute: '2-digit', timeZone: userTZ });
+      return f.format(new Date(base.getTime() + START * 3600000)) + ' – ' + f.format(new Date(base.getTime() + END * 3600000));
+    }
+    function tick() {
+      try {
+        me.textContent = fmt(HOME);
+        var h = hourIn(HOME, new Date()), on = h >= START && h < END;
+        if (sameZone) { row.style.display = 'none'; }
+        else {
+          you.textContent = fmt(userTZ);
+          youZ.textContent = userTZ.split('/').pop().replace(/_/g, ' ');
+          note.innerHTML = (on ? '<b>● Online now.</b> ' : '') + 'My working hours are <b>' + windowInYourTime() + '</b> your time.';
+        }
+      } catch (e) {}
+    }
+    tick(); setInterval(tick, 30000);
   })();
 </script>
 </body>
