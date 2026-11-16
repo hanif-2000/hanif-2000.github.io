@@ -142,6 +142,17 @@
   .photo-badge span { font-size: .74rem; color: var(--muted); }
   @media (max-width: 880px) { .photo-badge { left: 8px; } }
 
+  /* hero phone */
+  .phone { position: absolute; left: -26px; bottom: -36px; width: 146px; aspect-ratio: 9 / 19.5; background: #0b0f0b; border-radius: 26px; padding: 7px; box-shadow: 0 30px 60px -20px rgba(0,30,0,.5), 0 0 0 1px rgba(255,255,255,.06) inset; transform: translateZ(90px) rotate(-6deg); z-index: 3; }
+  .phone-screen { position: relative; width: 100%; height: 100%; border-radius: 20px; overflow: hidden; background: #fff; }
+  .phone-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transform: scale(1.04); transition: opacity .7s ease, transform 1.2s ease; }
+  .phone-screen img.on { opacity: 1; transform: none; }
+  .phone-notch { position: absolute; top: 11px; left: 50%; width: 46px; height: 13px; margin-left: -23px; background: #0b0f0b; border-radius: 10px; }
+  .phone-label { position: absolute; left: -10px; bottom: -78px; display: inline-flex; align-items: center; gap: .45rem; font-size: .78rem; font-weight: 600; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: .3rem .6rem; box-shadow: var(--shadow); transform: translateZ(70px); white-space: nowrap; }
+  .pl-dot { width: 8px; height: 8px; border-radius: 50%; background: #007A66; transition: background .4s ease; }
+  .photo-badge { left: auto; right: -18px; bottom: auto; top: 26px; }
+  @media (max-width: 880px) { .phone { left: -10px; bottom: -24px; width: 104px; border-radius: 20px; padding: 5px; } .phone-screen { border-radius: 15px; } .phone-notch { top: 8px; width: 32px; height: 9px; margin-left: -16px; } .phone-label { display: none; } .photo-badge { right: 8px; } }
+  @media (prefers-reduced-motion: reduce) { .phone-screen img { transition: none; } }
   .stats { margin-top: clamp(2.5rem, 6vw, 4rem); display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
   .stat { padding: 1.3rem 1.4rem; background: var(--surface); }
   .stat .n { font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1; display: block; font-variant-numeric: tabular-nums; }
@@ -451,6 +462,11 @@
           <div class="photo-card">
             <img src="assets/hanif.jpg" alt="Portrait of Hanif Mohammad" width="640" height="800" fetchpriority="high">
           </div>
+          <div class="phone" aria-label="Screens from apps I built" role="img">
+            <div class="phone-screen"><img src="assets/shots/tenax_1.jpg" alt="" data-app="Tenax ai" data-c="#007A66" width="196" height="424" class="on"><img src="assets/shots/xeniego_1.jpg" alt="" data-app="Xenie Go" data-c="#7C6CF0" width="196" height="424" loading="lazy"><img src="assets/shots/redpocket_1.jpg" alt="" data-app="Red Pocket" data-c="#E00000" width="196" height="424" loading="lazy"><img src="assets/shots/xtrafyl_1.jpg" alt="" data-app="Xtrafyl" data-c="#5050F0" width="196" height="424" loading="lazy"><img src="assets/shots/tenax_3.jpg" alt="" data-app="Tenax ai" data-c="#007A66" width="196" height="424" loading="lazy"><img src="assets/shots/xeniego_3.jpg" alt="" data-app="Xenie Go" data-c="#7C6CF0" width="196" height="424" loading="lazy"><img src="assets/shots/redpocket_2.jpg" alt="" data-app="Red Pocket" data-c="#E00000" width="196" height="424" loading="lazy"><img src="assets/shots/xtrafyl_3.jpg" alt="" data-app="Xtrafyl" data-c="#5050F0" width="196" height="424" loading="lazy"></div>
+            <span class="phone-notch" aria-hidden="true"></span>
+          </div>
+          <div class="phone-label" aria-hidden="true"><span class="pl-dot"></span><span class="pl-name">Tenax ai</span></div>
           <div class="photo-badge">
             <span class="ic" aria-hidden="true">★</span>
             <div><strong><a href="https://www.upwork.com/freelancers/~01b46f78c173c3ba9b" target="_blank" rel="noopener" class="badge-link">Top Rated Plus ↗</a></strong><span>Upwork · 100% Job Success</span></div>
@@ -1145,6 +1161,16 @@
       try { localStorage.setItem('theme', n); } catch (e) {}
       sync();
     });
+  })();
+  (function () {
+    var imgs = document.querySelectorAll('.phone-screen img'); if (imgs.length < 2) return;
+    var name = document.querySelector('.pl-name'), dot = document.querySelector('.pl-dot'), i = 0;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setInterval(function () {
+      imgs[i].classList.remove('on'); i = (i + 1) % imgs.length; imgs[i].classList.add('on');
+      if (name) name.textContent = imgs[i].getAttribute('data-app');
+      if (dot) dot.style.background = imgs[i].getAttribute('data-c');
+    }, 2600);
   })();
 </script>
 </body>
