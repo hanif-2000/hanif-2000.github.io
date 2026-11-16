@@ -1244,9 +1244,20 @@
     document.querySelectorAll('.copy-btn').forEach(function (b) {
       b.addEventListener('click', function () {
         var t = b.getAttribute('data-copy');
-        var ok = function () { b.textContent = 'Copied ✓'; b.classList.add('done'); setTimeout(function () { b.textContent = 'Copy'; b.classList.remove('done'); }, 1800); };
-        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t).then(ok, function () {}); }
-        else { var ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); ok(); } catch (e) {} ta.remove(); }
+        var flash = function (msg, cls) { b.textContent = msg; b.classList.toggle('done', cls === 'done'); clearTimeout(b._t); b._t = setTimeout(function () { b.textContent = 'Copy'; b.classList.remove('done'); }, 2200); };
+        var legacy = function () {
+          var ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select(); var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} ta.remove(); return ok;
+        };
+        var manual = function () {
+          var a = b.parentNode.querySelector('.mail-link'), r = document.createRange(); r.selectNodeContents(a);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+          flash(/Mac|iPhone|iPad/.test(navigator.platform) ? 'Press ⌘C' : 'Press Ctrl+C');
+        };
+        var done = function () { flash('Copied ✓', 'done'); };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(t).then(done, function () { legacy() ? done() : manual(); });
+        } else { legacy() ? done() : manual(); }
       });
     });
   })();
