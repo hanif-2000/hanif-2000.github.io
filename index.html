@@ -455,6 +455,11 @@
   .photo-badge.ub:hover { border-color: var(--accent); }
   .ub-item { display: inline-flex; align-items: center; gap: .55rem; font-size: .9rem; font-weight: 600; white-space: nowrap; }
   .ub-ic { width: 26px; height: 26px; flex: none; }
+  .to-top { position: fixed; right: 20px; bottom: 20px; z-index: 60; width: 44px; height: 44px; display: grid; place-items: center; border-radius: var(--radius); background: var(--btn-bg); color: var(--btn-ink); box-shadow: var(--shadow-lg); text-decoration: none; opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .2s ease, transform .2s ease, background .15s ease; }
+  .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+  .to-top:hover { background: var(--accent); color: #fff; }
+  .to-top svg { width: 20px; height: 20px; }
+  @media (max-width: 560px) { .to-top { right: 14px; bottom: 14px; width: 40px; height: 40px; } }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Hanif Mohammad","jobTitle":"Senior React & React Native Developer","url":"https://hanif-2000.github.io/","image":"https://hanif-2000.github.io/assets/hanif.jpg","email":"mailto:thehanifmohammad@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Jaipur","addressCountry":"IN"},"alumniOf":"Himalayan Garhwal University","knowsAbout":["React Native","React","Next.js","TypeScript","Node.js","Firebase"],"sameAs":["https://www.upwork.com/freelancers/~01b46f78c173c3ba9b","https://www.linkedin.com/in/hanif-mohammad-385a051b7","https://github.com/hanif-2000","https://www.instagram.com/freelancer.hanif/"]}
@@ -1090,6 +1095,8 @@
 
 </main>
 
+<a href="#top" class="to-top" id="toTop" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+
 <footer class="site wrap">
   <span>© 2026 Hanif Mohammad</span>
   <span>Senior React &amp; React Native Developer · Jaipur</span>
@@ -1245,6 +1252,17 @@
       } catch (e) {}
     }
     tick(); setInterval(tick, 30000);
+  })();
+  (function () {
+    var b = document.getElementById('toTop'); if (!b) return;
+    var f = function () { b.classList.toggle('show', window.scrollY > window.innerHeight * 1.2); };
+    window.addEventListener('scroll', f, { passive: true }); f();
+    b.addEventListener('click', function (e) {
+      e.preventDefault();
+      var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    });
   })();
 </script>
 </body>
