@@ -390,6 +390,30 @@
   .tz-z { font-size: .78rem; color: #A9B5A4; }
   .tz-note { margin: .55rem 0 0; font-size: .82rem; color: #CFE6C9; }
   .tz-note b { color: #7FE070; }
+  .cform { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.14); padding-top: clamp(1.6rem, 4vw, 2.4rem); }
+  .cform-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .4rem 1rem; margin-bottom: 1rem; }
+  .cform-head .label { color: #A9B5A4; }
+  .cform-sub { font-size: .88rem; color: #CFE6C9; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .cf-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem 1rem; }
+  @media (max-width: 640px) { .cf-grid { grid-template-columns: 1fr; } }
+  .cf { display: grid; gap: .35rem; font-size: .82rem; color: #A9B5A4; }
+  .cf.full { grid-column: 1 / -1; }
+  .cf em { font-style: normal; opacity: .7; }
+  .cf input, .cf select, .cf textarea { font: inherit; font-size: .95rem; color: #F3F1EC; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius); padding: .7rem .8rem; width: 100%; transition: border-color .15s ease, background .15s ease; }
+  .cf select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, #A9B5A4 50%), linear-gradient(135deg, #A9B5A4 50%, transparent 50%); background-position: calc(100% - 18px) 55%, calc(100% - 13px) 55%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 2rem; }
+  .cf select option { color: #001E00; }
+  .cf textarea { resize: vertical; min-height: 110px; }
+  .cf input::placeholder, .cf textarea::placeholder { color: rgba(243,241,236,.4); }
+  .cf input:focus, .cf select:focus, .cf textarea:focus { outline: none; border-color: #7FE070; background: rgba(255,255,255,.09); }
+  .cf .bad { border-color: #FF8A7A; }
+  .cf-foot { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; margin-top: 1rem; }
+  .cf-btn { font: inherit; font-weight: 600; font-size: .95rem; color: #fff; background: #0E7A00; border: 0; border-radius: var(--radius); padding: .85rem 1.4rem; cursor: pointer; transition: background .15s ease, transform .15s ease; }
+  .cf-btn:hover { background: #0D7300; transform: translateY(-1px); }
+  .cf-btn[disabled] { opacity: .6; cursor: progress; transform: none; }
+  .cf-status { margin: 0; font-size: .88rem; color: #CFE6C9; }
+  .cf-status.ok { color: #7FE070; }
+  .cf-status.err { color: #FF8A7A; }
   .contact-side { display: grid; gap: 1.4rem; align-self: stretch; align-content: space-between; }
   .upwork-btn { display: flex; justify-content: space-between; align-items: center; gap: 1rem; text-decoration: none; background: #0E7A00; color: #fff; border-radius: var(--radius); padding: 1rem 1.2rem; font-size: 1.2rem; transition: background .15s ease, transform .15s ease; }
   .upwork-btn:hover { background: #0D7300; transform: translateY(-2px); }
@@ -650,7 +674,7 @@
             <h4>Bloop</h4>
             <p>AI video-creation social app — record, trim, pick a template and prompt, and watch the AI render live.</p>
             <div class="p-stack"><span>React Native</span><span>VisionCamera</span><span>WebSockets</span><span>RevenueCat</span></div>
-            <div class="p-links"><span class="p-note">Shipped · no longer listed on the stores</span></div>
+            <div class="p-links"><span class="p-note">Shipped · since removed from the App Store</span></div>
           </article>
 
           <article class="project" style="--brand:#1E2E70">
@@ -671,7 +695,7 @@
             <div class="p-top"><span class="p-tile t3" aria-hidden="true">Z</span><span class="p-cat">Wellness</span></div>
             <h4>Zenbase</h4>
             <p>Meditate to earn — a wellness app that rewards mindfulness and helps build a daily meditation habit.</p>
-            <div class="p-links"><span class="p-note">Shipped · no longer listed on the stores</span></div>
+            <div class="p-links"><span class="p-note">Shipped on the US App Store · no longer listed</span></div>
           </article>
 
           </div>
@@ -1104,6 +1128,39 @@
             <a href="https://www.instagram.com/freelancer.hanif/" target="_blank" rel="noopener" aria-label="Instagram profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#F9CE34"/><stop offset=".5" stop-color="#EE2A7B"/><stop offset="1" stop-color="#6228D7"/></linearGradient></defs><rect width="24" height="24" rx="5" fill="url(#igg)"/><rect x="6" y="6" width="12" height="12" rx="3.6" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="15.6" cy="8.4" r=".9" fill="#fff"/></svg>Instagram</span><span class="arr" aria-hidden="true">↗</span></a>
           </div>
         </div>
+        <form class="cform" id="cform" action="https://formsubmit.co/thehanifmohammad@gmail.com" method="POST" novalidate>
+          <div class="cform-head"><span class="label">Send a message</span><span class="cform-sub">Tell me about your app — I reply within a day.</span></div>
+          <input type="hidden" name="_subject" value="New enquiry from hanif-2000.github.io">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="cf-grid">
+            <label class="cf"><span>Name</span><input type="text" name="name" autocomplete="name" required maxlength="80"></label>
+            <label class="cf"><span>Email</span><input type="email" name="email" autocomplete="email" required maxlength="120"></label>
+            <label class="cf"><span>Project type</span>
+              <select name="project_type">
+                <option>New mobile app (React Native)</option>
+                <option>Web app / dashboard (Next.js)</option>
+                <option>Fix or speed up an existing app</option>
+                <option>Ongoing / part-time work</option>
+                <option>Something else</option>
+              </select></label>
+            <label class="cf"><span>Budget <em>(optional)</em></span>
+              <select name="budget">
+                <option value="">Not sure yet</option>
+                <option>Under $1,000</option>
+                <option>$1,000 – $5,000</option>
+                <option>$5,000 – $15,000</option>
+                <option>$15,000+</option>
+                <option>Hourly</option>
+              </select></label>
+            <label class="cf full"><span>Message</span><textarea name="message" rows="4" required maxlength="3000" placeholder="What are you building, and by when?"></textarea></label>
+          </div>
+          <div class="cf-foot">
+            <button type="submit" class="cf-btn">Send message <span aria-hidden="true">→</span></button>
+            <p class="cf-status" id="cfStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -1319,6 +1376,31 @@
       var pin = svg.querySelector('.pin[data-c="' + ch.getAttribute('data-c') + '"]'); if (!pin) return;
       ['mouseenter', 'focus', 'click'].forEach(function (ev) { ch.addEventListener(ev, function () { show(pin); }); });
       ch.addEventListener('mouseleave', hide); ch.addEventListener('blur', hide);
+    });
+  })();
+  (function () {
+    var f = document.getElementById('cform'); if (!f) return;
+    var st = document.getElementById('cfStatus'), btn = f.querySelector('.cf-btn');
+    var say = function (t, c) { st.textContent = t; st.className = 'cf-status' + (c ? ' ' + c : ''); };
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var bad = null;
+      ['name', 'email', 'message'].forEach(function (n) {
+        var el = f.elements[n], ok = el.value.trim() && (n !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()));
+        el.classList.toggle('bad', !ok); if (!ok && !bad) bad = el;
+      });
+      if (bad) { say('Please fill in your name, a valid email and a short message.', 'err'); bad.focus(); return; }
+      if (f.elements._honey.value) return;
+      btn.disabled = true; say('Sending…');
+      var data = new FormData(f); data.append('_replyto', f.elements.email.value.trim());
+      fetch('https://formsubmit.co/ajax/thehanifmohammad@gmail.com', { method: 'POST', headers: { 'Accept': 'application/json' }, body: data })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (res.ok && String(res.j.success) === 'true') { f.reset(); say('Thanks! Your message is on its way — I’ll reply within a day.', 'ok'); }
+          else throw new Error((res.j && res.j.message) || 'send failed');
+        })
+        .catch(function () { say('Couldn’t send right now. Please email thehanifmohammad@gmail.com instead.', 'err'); })
+        .then(function () { btn.disabled = false; });
     });
   })();
 </script>
