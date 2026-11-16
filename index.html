@@ -451,6 +451,10 @@
     .phone-label { display: none; }
     .photo-badge { right: -6px; bottom: 16px; }
   }
+  .photo-badge.ub { display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; padding: .7rem .9rem; text-decoration: none; color: var(--ink); transition: border-color .15s ease, transform .15s ease; }
+  .photo-badge.ub:hover { border-color: var(--accent); }
+  .ub-item { display: inline-flex; align-items: center; gap: .55rem; font-size: .9rem; font-weight: 600; white-space: nowrap; }
+  .ub-ic { width: 26px; height: 26px; flex: none; }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Hanif Mohammad","jobTitle":"Senior React & React Native Developer","url":"https://hanif-2000.github.io/","image":"https://hanif-2000.github.io/assets/hanif.jpg","email":"mailto:thehanifmohammad@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Jaipur","addressCountry":"IN"},"alumniOf":"Himalayan Garhwal University","knowsAbout":["React Native","React","Next.js","TypeScript","Node.js","Firebase"],"sameAs":["https://www.upwork.com/freelancers/~01b46f78c173c3ba9b","https://www.linkedin.com/in/hanif-mohammad-385a051b7","https://github.com/hanif-2000","https://www.instagram.com/freelancer.hanif/"]}
@@ -503,10 +507,10 @@
             <span class="phone-notch" aria-hidden="true"></span>
           </div>
           <div class="phone-label" aria-hidden="true"><span class="pl-dot"></span><span class="pl-name">Tenax ai</span></div>
-          <div class="photo-badge">
-            <span class="ic" aria-hidden="true">★</span>
-            <div><strong><a href="https://www.upwork.com/freelancers/~01b46f78c173c3ba9b" target="_blank" rel="noopener" class="badge-link">Top Rated Plus ↗</a></strong><span>Upwork · 100% Job Success</span></div>
-          </div>
+          <a class="photo-badge ub" href="https://www.upwork.com/freelancers/~01b46f78c173c3ba9b" target="_blank" rel="noopener" aria-label="Upwork profile: 100% Job Success, Top Rated Plus">
+            <span class="ub-item"><svg class="ub-ic" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14.5" fill="none" stroke="#2F5FDB" stroke-width="2.2"/><path d="M9.5 19.5 8.5 12l4.4 3.4L16 10l3.1 5.4 4.4-3.4-1 7.5z" fill="#2F5FDB"/><rect x="9.6" y="21" width="12.8" height="1.9" rx=".9" fill="#2F5FDB"/></svg><span>100% Job Success</span></span>
+            <span class="ub-item"><svg class="ub-ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 1.8 28.3 8.9v14.2L16 30.2 3.7 23.1V8.9z" fill="#E36BB5"/><path d="M14.6 9.2l1.6 3.4 3.7.5-2.7 2.6.7 3.7-3.3-1.8-3.3 1.8.7-3.7-2.7-2.6 3.7-.5z" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M21 17.5v4.6M18.7 19.8h4.6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg><span>Top Rated Plus</span></span>
+          </a>
           </div>
         </div>
       </div>
