@@ -8,5 +8,15 @@
     "image": "assets/posts/2026-11-19-intro.jpg",
     "alt": "Intro card: Hanif Mohammad, Senior React & React Native developer, with key stats and a full-length photo",
     "instagram": "https://www.instagram.com/p/Df6PHC0OuyH/"
+  },
+  {
+    "id": "2026-11-25-red-pocket",
+    "date": "2026-11-25",
+    "type": "Project spotlight",
+    "title": "Red Pocket Mobile — 50K+ downloads",
+    "text": "The customer app for a US mobile carrier on iOS and Android: usage dashboard, bill pay and plan changes, an in-app phone shop and SIM / eSIM activation. ~11 months and 1,916 hours on Upwork. 50K+ downloads on Google Play, ★ 4.5 on the App Store.",
+    "image": "assets/posts/2026-11-25-red-pocket.jpg",
+    "alt": "Red Pocket Mobile project card: 50K+ downloads, ratings, key features and two app screenshots",
+    "instagram": ""
   }
 ]
