@@ -347,23 +347,24 @@
   .slider-track::-webkit-scrollbar { display: none; }
   .slider-track:focus-visible { outline-offset: 4px; }
   .slider-track > * { flex: 0 0 100%; scroll-snap-align: start; min-width: 0; }
-  .reviews-track > * { flex-basis: calc((100% - 2rem) / 3); }
-  @media (max-width: 900px) { .reviews-track > * { flex-basis: calc((100% - 1rem) / 2); } }
-  @media (max-width: 580px) { .reviews-track > * { flex-basis: 100%; } }
   @media (prefers-reduced-motion: reduce) { .slider-track { scroll-behavior: auto; } }
   .slider-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem; }
   .slider-btn { width: 2.4rem; height: 2.4rem; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1rem; cursor: pointer; }
   .slider-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-ink); }
   .slider-btn:disabled { opacity: .4; cursor: default; }
-  .slider-count { min-width: 6.5rem; text-align: center; font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .slider-count { min-width: 4.5rem; text-align: center; font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .slider-count:empty, .slider-dots:empty { display: none; }
   .slider-dots { display: flex; gap: .45rem; }
   .slider-dot { width: .55rem; height: .55rem; padding: 0; border: 0; border-radius: 2px; background: var(--line-strong); cursor: pointer; transition: width .2s ease, background .2s ease; }
   .slider-dot[aria-current="true"] { width: 1.6rem; background: var(--accent); }
-  .reviews-track .review blockquote { flex: 0 1 auto; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; line-clamp: 6; overflow: hidden; }
-  .reviews-track .review.open blockquote { display: block; -webkit-line-clamp: unset; line-clamp: none; }
-  .reviews-track .review h3 { margin-top: auto; }
-  .more-btn { align-self: flex-start; margin-top: -.4rem; padding: 0; border: 0; background: none; color: var(--accent-ink); font: inherit; font-size: .85rem; font-weight: 600; cursor: pointer; }
-  .more-btn:hover { text-decoration: underline; }
+  .slider .more-wrap { margin-top: 1rem; }
+  /* "View all": the track becomes a grid */
+  .slider.is-all .slider-track { display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 1rem; overflow: visible; scroll-snap-type: none; padding: 0; margin: 0; }
+  .slider.is-all .slider-nav { display: none; }
+  .slider[data-cols="1"] { --cols: 1; }
+  .slider[data-cols="3"] { --cols: 3; }
+  @media (max-width: 900px) { .slider[data-cols="3"] { --cols: 2; } }
+  @media (max-width: 580px) { .slider[data-cols="3"] { --cols: 1; } }
   .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   @media (max-width: 900px) { .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 580px) { .projects-grid { grid-template-columns: 1fr; } }
@@ -483,7 +484,7 @@
   .cf-status { margin: 0; font-size: .88rem; color: #CFE6C9; }
   .cf-status.ok { color: #7FE070; }
   .cf-status.err { color: #FF8A7A; }
-  .contact-side { display: grid; gap: 1.4rem; align-self: stretch; align-content: space-between; }
+  .contact-side { display: grid; gap: 1.4rem; align-self: center; align-content: start; }
   .upwork-btn { display: flex; justify-content: space-between; align-items: center; gap: 1rem; text-decoration: none; background: #0E7A00; color: #fff; border-radius: var(--radius); padding: 1rem 1.2rem; font-size: 1.2rem; transition: background .15s ease, transform .15s ease; }
   .upwork-btn:hover { background: #0D7300; transform: translateY(-2px); }
   .upwork-btn strong { display: block; font-size: 1.05rem; }
@@ -494,11 +495,10 @@
   .help ul { list-style: none; margin: .8rem 0 0; padding: 0; display: grid; gap: .55rem; }
   .help li { position: relative; padding-left: 1.3rem; font-size: .93rem; color: #E6EDE3; }
   .help li::before { content: "✓"; position: absolute; left: 0; color: #7FE070; font-weight: 700; }
-  .socials { display: flex; flex-direction: column; }
-  .socials a { display: flex; justify-content: space-between; align-items: center; text-decoration: none; padding: .95rem 0; border-top: 1px solid rgba(255,255,255,.14); font-size: .98rem; transition: color .15s ease, padding-left .15s ease; }
-  .socials a:last-child { border-bottom: 1px solid rgba(255,255,255,.14); }
-  .socials a:hover { color: #7FE070; padding-left: .35rem; }
-  .socials .arr { opacity: .6; }
+  .socials { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .5rem; border-top: 1px solid rgba(255,255,255,.14); padding-top: clamp(1.4rem, 4vw, 2rem); }
+  .socials a { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; padding: .45rem .7rem .45rem .5rem; border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius); font-size: .88rem; transition: color .15s ease, border-color .15s ease, transform .15s ease; }
+  .socials a:hover { color: #7FE070; border-color: #7FE070; transform: translateY(-1px); }
+  .socials .arr { display: none; }
 
   footer.site { padding-block: 2.2rem 2.8rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: .82rem; color: var(--muted); }
 
@@ -658,7 +658,8 @@
 
       <div class="work-group reveal">
         <div class="group-label"><h3>Featured projects</h3><span class="count">Sorted by downloads</span></div>
-        <div class="featured">
+        <div class="slider" data-autoplay="5000" data-cols="1" aria-roledescription="carousel" aria-label="Featured projects">
+          <div class="slider-track" tabindex="0">
         <article class="feature-card" style="--brand:#E00000">
           <div class="f-body">
             <div class="p-top"><img class="p-icon" src="assets/icons/redpocket.png" alt="" loading="lazy" width="52" height="52"><span class="p-cat">Telecom</span></div>
@@ -712,11 +713,20 @@
           <div class="f-media"><div class="f-shots"><img src="assets/shots/xtrafyl_1.jpg" alt="Xtrafyl screenshot 1" loading="lazy" width="196" height="424"><img src="assets/shots/xtrafyl_2.jpg" alt="Xtrafyl screenshot 2" loading="lazy" width="196" height="424"><img src="assets/shots/xtrafyl_3.jpg" alt="Xtrafyl screenshot 3" loading="lazy" width="196" height="424"></div></div>
         </article>
         </div>
+          <div class="slider-nav">
+            <button type="button" class="slider-btn" data-dir="-1" aria-label="Previous">←</button>
+            <div class="slider-dots"></div>
+            <span class="slider-count" aria-live="polite"></span>
+            <button type="button" class="slider-btn" data-dir="1" aria-label="Next">→</button>
+          </div>
+          <div class="more-wrap"><button type="button" class="more-btn view-all" aria-expanded="false">View all</button></div>
+        </div>
       </div>
 
       <div class="work-group reveal">
         <div class="group-label"><h3>More mobile apps</h3><span class="count">6 shipped · 2 live on the stores</span></div>
-        <div class="projects-grid">
+        <div class="slider" data-autoplay="5000" data-cols="3" aria-roledescription="carousel" aria-label="More mobile apps">
+          <div class="slider-track" tabindex="0">
 
           <article class="project" style="--brand:#D9A800">
             <div class="p-top"><img class="p-icon" src="assets/icons/kash.jpg" alt="" loading="lazy" width="52" height="52"><span class="p-cat">Gaming · Trivia</span></div>
@@ -769,11 +779,20 @@
           </article>
 
           </div>
+          <div class="slider-nav">
+            <button type="button" class="slider-btn" data-dir="-1" aria-label="Previous">←</button>
+            <div class="slider-dots"></div>
+            <span class="slider-count" aria-live="polite"></span>
+            <button type="button" class="slider-btn" data-dir="1" aria-label="Next">→</button>
+          </div>
+          <div class="more-wrap"><button type="button" class="more-btn view-all" aria-expanded="false">View all</button></div>
+        </div>
       </div>
 
       <div class="work-group reveal">
         <div class="group-label"><h3>Web apps</h3><span class="count">7 live</span></div>
-        <div class="projects-grid" data-limit="3" data-more="Show all {n} web apps">
+        <div class="slider" data-autoplay="5000" data-cols="3" aria-roledescription="carousel" aria-label="Web apps">
+          <div class="slider-track" tabindex="0">
 
           <article class="project">
             <div class="p-top"><span class="p-tile t2" aria-hidden="true">T</span><span class="p-cat">Marketplace · UAE</span></div>
@@ -825,12 +844,20 @@
           </article>
 
         </div>
+          <div class="slider-nav">
+            <button type="button" class="slider-btn" data-dir="-1" aria-label="Previous">←</button>
+            <div class="slider-dots"></div>
+            <span class="slider-count" aria-live="polite"></span>
+            <button type="button" class="slider-btn" data-dir="1" aria-label="Next">→</button>
+          </div>
+          <div class="more-wrap"><button type="button" class="more-btn view-all" aria-expanded="false">View all</button></div>
+        </div>
       </div>
       <div class="work-group reveal">
         <div class="group-label"><h3>Open source</h3><span class="count">4 npm packages</span></div>
-        <div class="slider" data-autoplay="5000" aria-roledescription="carousel" aria-label="Open source packages">
+        <div class="slider" data-autoplay="5000" data-cols="1" aria-roledescription="carousel" aria-label="Open source packages">
           <div class="slider-track" tabindex="0">
-          <article class="oss-card" role="group" aria-roledescription="slide">
+          <article class="oss-card">
           <div class="oss-main">
             <div class="oss-head"><span class="oss-badge">npm package</span><span class="oss-meta">MIT · zero dependencies · Node 18+</span></div>
             <h4>rn-16kb-check</h4>
@@ -850,7 +877,7 @@
 <b class="r">✖ 2 of 4 64-bit libraries are not 16 KB compatible.</b></pre>
           </div>
         </article>
-          <article class="oss-card" role="group" aria-roledescription="slide">
+          <article class="oss-card">
             <div class="oss-main">
               <div class="oss-head"><span class="oss-badge">npm package</span><span class="oss-meta">MIT · zero dependencies · Node 18+</span></div>
               <h4>rn-privacy-manifest-check</h4>
@@ -871,7 +898,7 @@
 <b class="r">✖ 1 missing, 1 invalid (3 native packages scanned).</b></pre>
             </div>
           </article>
-          <article class="oss-card" role="group" aria-roledescription="slide">
+          <article class="oss-card">
             <div class="oss-main">
               <div class="oss-head"><span class="oss-badge">npm package</span><span class="oss-meta">MIT · zero dependencies · Node 18+</span></div>
               <h4>eas-config-check</h4>
@@ -891,7 +918,7 @@
 <b class="r">✖ 3 errors · 0 warnings</b></pre>
             </div>
           </article>
-          <article class="oss-card" role="group" aria-roledescription="slide">
+          <article class="oss-card">
             <div class="oss-main">
               <div class="oss-head"><span class="oss-badge">npm package</span><span class="oss-meta">MIT · zero dependencies · React 16.8+</span></div>
               <h4>use-timezone-overlap</h4>
@@ -918,8 +945,10 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="slider-nav">
             <button type="button" class="slider-btn" data-dir="-1" aria-label="Previous">←</button>
             <div class="slider-dots"></div>
+            <span class="slider-count" aria-live="polite"></span>
             <button type="button" class="slider-btn" data-dir="1" aria-label="Next">→</button>
           </div>
+          <div class="more-wrap"><button type="button" class="more-btn view-all" aria-expanded="false">View all</button></div>
         </div>
       </div>
     </div>
@@ -935,8 +964,8 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
       <div class="reviews-top reveal">
         <span>Top Rated Plus · 100% Job Success on Upwork</span>
       </div>
-      <div class="slider reveal" data-autoplay="5000" aria-roledescription="carousel" aria-label="Client reviews">
-      <div class="slider-track reviews-track" tabindex="0">
+      <div class="slider reveal" data-autoplay="5000" data-cols="3" aria-roledescription="carousel" aria-label="Client reviews">
+      <div class="slider-track" tabindex="0">
 
         <!-- Review card. Written review -> <blockquote>; stars only -> <p class="summary">.
              Desktop grid is 6 columns: .featured = 4, default = 2, .half = 3. Keep every row summing to 6. -->
@@ -1086,10 +1115,12 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
 
       </div>
         <div class="slider-nav">
-          <button type="button" class="slider-btn" data-dir="-1" aria-label="Previous reviews">←</button>
+          <button type="button" class="slider-btn" data-dir="-1" aria-label="Previous">←</button>
+          <div class="slider-dots"></div>
           <span class="slider-count" aria-live="polite"></span>
-          <button type="button" class="slider-btn" data-dir="1" aria-label="Next reviews">→</button>
+          <button type="button" class="slider-btn" data-dir="1" aria-label="Next">→</button>
         </div>
+        <div class="more-wrap"><button type="button" class="more-btn view-all" aria-expanded="false">View all</button></div>
       </div>
     </div>
   </section>
@@ -1330,13 +1361,6 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
               <li>Ongoing or part-time development</li>
             </ul>
           </div>
-          <div class="socials">
-          <a href="https://www.linkedin.com/in/hanif-mohammad-385a051b7" target="_blank" rel="noopener" aria-label="LinkedIn profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0A66C2"/><path fill="#fff" d="M7.1 9.6h-2.5V19h2.5zM5.85 5a1.45 1.45 0 1 0 0 2.9 1.45 1.45 0 0 0 0-2.9zM19.4 13.7c0-2.6-1.4-4.3-3.6-4.3-1.3 0-2.1.7-2.5 1.3V9.6h-2.4V19h2.5v-4.9c0-1.3.5-2.2 1.7-2.2 1.1 0 1.6.8 1.6 2.2V19h2.7z"/></svg>LinkedIn</span><span class="arr" aria-hidden="true">↗</span></a>
-          <a href="https://github.com/hanif-2000" target="_blank" rel="noopener" aria-label="GitHub profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#24292F"/><path fill="#fff" d="M12 4.2a7.9 7.9 0 0 0-2.5 15.4c.4.1.5-.2.5-.4v-1.4c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.4.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-3.9 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.5 7.5 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3-1.8 3.7-3.6 3.9.3.3.5.8.5 1.5v2.2c0 .2.1.5.6.4A7.9 7.9 0 0 0 12 4.2z"/></svg>GitHub</span><span class="arr" aria-hidden="true">↗</span></a>
-            <a href="https://www.instagram.com/freelancer.hanif/" target="_blank" rel="noopener" aria-label="Instagram profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#F9CE34"/><stop offset=".5" stop-color="#EE2A7B"/><stop offset="1" stop-color="#6228D7"/></linearGradient></defs><rect width="24" height="24" rx="5" fill="url(#igg)"/><rect x="6" y="6" width="12" height="12" rx="3.6" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="15.6" cy="8.4" r=".9" fill="#fff"/></svg>Instagram</span><span class="arr" aria-hidden="true">↗</span></a>
-            <a href="https://www.facebook.com/profile.php?id=61596625054352" target="_blank" rel="noopener" aria-label="Facebook profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#1877F2"/><path fill="#fff" d="M15.6 12.7l.4-2.9h-2.8V8c0-.8.4-1.6 1.6-1.6H16V4c0 0-1.1-.2-2.2-.2-2.3 0-3.7 1.4-3.7 3.9v2.1H7.6v2.9h2.5V20h3.1v-7.3z"/></svg>Facebook</span><span class="arr" aria-hidden="true">↗</span></a>
-            <a href="https://x.com/developer_hanif" target="_blank" rel="noopener" aria-label="X profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#000"/><path fill="#fff" d="M13.3 10.9 18.4 5h-1.2l-4.4 5.1L9.3 5H5.2l5.3 7.7L5.2 19h1.2l4.6-5.4 3.7 5.4h4.1zm-1.6 1.9-.5-.8-4.3-6.1h1.8l3.4 4.9.5.8 4.5 6.4h-1.8z"/></svg>X</span><span class="arr" aria-hidden="true">↗</span></a>
-          </div>
         </div>
         <form class="cform" id="cform" action="https://formsubmit.co/76a64b78fdd1934cc1b527df7a688e63" method="POST" novalidate>
           <div class="cform-head"><span class="label">Send a message</span><span class="cform-sub">Tell me about your app — I reply within a day.</span></div>
@@ -1371,6 +1395,15 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
             <p class="cf-status" id="cfStatus" role="status" aria-live="polite"></p>
           </div>
         </form>
+        <div class="socials">
+            <a href="https://www.linkedin.com/in/hanif-mohammad-385a051b7" target="_blank" rel="noopener" aria-label="LinkedIn profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0A66C2"/><path fill="#fff" d="M7.1 9.6h-2.5V19h2.5zM5.85 5a1.45 1.45 0 1 0 0 2.9 1.45 1.45 0 0 0 0-2.9zM19.4 13.7c0-2.6-1.4-4.3-3.6-4.3-1.3 0-2.1.7-2.5 1.3V9.6h-2.4V19h2.5v-4.9c0-1.3.5-2.2 1.7-2.2 1.1 0 1.6.8 1.6 2.2V19h2.7z"/></svg>LinkedIn</span><span class="arr" aria-hidden="true">↗</span></a>
+            <a href="https://github.com/hanif-2000" target="_blank" rel="noopener" aria-label="GitHub profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#24292F"/><path fill="#fff" d="M12 4.2a7.9 7.9 0 0 0-2.5 15.4c.4.1.5-.2.5-.4v-1.4c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.4.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-3.9 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.5 7.5 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3-1.8 3.7-3.6 3.9.3.3.5.8.5 1.5v2.2c0 .2.1.5.6.4A7.9 7.9 0 0 0 12 4.2z"/></svg>GitHub</span><span class="arr" aria-hidden="true">↗</span></a>
+            <a href="https://www.instagram.com/freelancer.hanif/" target="_blank" rel="noopener" aria-label="Instagram profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#F9CE34"/><stop offset=".5" stop-color="#EE2A7B"/><stop offset="1" stop-color="#6228D7"/></linearGradient></defs><rect width="24" height="24" rx="5" fill="url(#igg)"/><rect x="6" y="6" width="12" height="12" rx="3.6" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="15.6" cy="8.4" r=".9" fill="#fff"/></svg>Instagram</span><span class="arr" aria-hidden="true">↗</span></a>
+            <a href="https://www.facebook.com/profile.php?id=61596625054352" target="_blank" rel="noopener" aria-label="Facebook profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#1877F2"/><path fill="#fff" d="M15.6 12.7l.4-2.9h-2.8V8c0-.8.4-1.6 1.6-1.6H16V4c0 0-1.1-.2-2.2-.2-2.3 0-3.7 1.4-3.7 3.9v2.1H7.6v2.9h2.5V20h3.1v-7.3z"/></svg>Facebook</span><span class="arr" aria-hidden="true">↗</span></a>
+            <a href="https://x.com/developer_hanif" target="_blank" rel="noopener" aria-label="X profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#000"/><path fill="#fff" d="M13.3 10.9 18.4 5h-1.2l-4.4 5.1L9.3 5H5.2l5.3 7.7L5.2 19h1.2l4.6-5.4 3.7 5.4h4.1zm-1.6 1.9-.5-.8-4.3-6.1h1.8l3.4 4.9.5.8 4.5 6.4h-1.8z"/></svg>X</span><span class="arr" aria-hidden="true">↗</span></a>
+            <a href="https://www.npmjs.com/~the_hanif_mohammad" target="_blank" rel="noopener" aria-label="npm packages"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#CB3837"/><text x="12" y="15.6" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#fff">npm</text></svg>npm</span><span class="arr" aria-hidden="true">↗</span></a>
+            <a href="https://www.hackerrank.com/profile/thehanifmohd" target="_blank" rel="noopener" aria-label="HackerRank profile"><span class="so"><svg class="so-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#1BA94C"/><text x="12" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#fff">H</text></svg>HackerRank</span><span class="arr" aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -1536,54 +1569,59 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
     }
     tick(); setInterval(tick, 30000);
   })();
-  document.querySelectorAll('.reviews-track .review blockquote').forEach(function (q) {
-    if (q.scrollHeight <= q.clientHeight + 2) return;
-    var b = document.createElement('button'); b.type = 'button'; b.className = 'more-btn';
-    b.textContent = 'Read more'; b.setAttribute('aria-expanded', 'false');
-    b.addEventListener('click', function () {
-      var open = q.parentNode.classList.toggle('open');
-      b.textContent = open ? 'Show less' : 'Read more'; b.setAttribute('aria-expanded', String(open));
-    });
-    q.insertAdjacentElement('afterend', b);
-  });
   document.querySelectorAll('.slider').forEach(function (root) {
     var t = root.querySelector('.slider-track'), slides = t.children, n = slides.length;
     var dots = root.querySelector('.slider-dots'), count = root.querySelector('.slider-count');
     var prev = root.querySelector('[data-dir="-1"]'), next = root.querySelector('[data-dir="1"]');
-    var cur = 0, timer, settle, paused = false, visible = false;
+    var all = root.querySelector('.view-all'), useDots = n <= 7;
+    var cur = 0, timer, settle, paused = false, visible = false, expanded = false;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var delay = +root.getAttribute('data-autoplay') || 0;
+    if (n < 2) { root.querySelector('.slider-nav').hidden = true; if (all) all.parentNode.hidden = true; }
     function step() { return n > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : t.clientWidth; }
-    function perView() { return Math.max(1, Math.round((t.clientWidth + 16) / step())); }
-    function last() { return Math.max(0, n - perView()); }
     function mark() {
-      var pv = perView();
-      if (dots) dots.querySelectorAll('.slider-dot').forEach(function (d, i) { d.setAttribute('aria-current', i === cur ? 'true' : 'false'); });
-      if (count) count.textContent = (pv > 1 ? (cur + 1) + '–' + Math.min(n, cur + pv) : (cur + 1)) + ' of ' + n;
-      prev.disabled = cur === 0; next.disabled = cur >= last();
+      if (useDots) dots.querySelectorAll('.slider-dot').forEach(function (d, i) { d.setAttribute('aria-current', i === cur ? 'true' : 'false'); });
+      else count.textContent = (cur + 1) + ' of ' + n;
+      prev.disabled = cur === 0; next.disabled = cur >= n - 1;
     }
-    function go(i) { cur = Math.max(0, Math.min(last(), i)); mark(); t.scrollTo({ left: slides[cur].offsetLeft - slides[0].offsetLeft }); }
+    function go(i) { cur = Math.max(0, Math.min(n - 1, i)); mark(); t.scrollTo({ left: slides[cur].offsetLeft - slides[0].offsetLeft }); }
     Array.prototype.forEach.call(slides, function (sl, i) {
-      sl.setAttribute('aria-label', (i + 1) + ' of ' + n);
-      if (!dots) return;
+      sl.setAttribute('role', 'group'); sl.setAttribute('aria-roledescription', 'slide'); sl.setAttribute('aria-label', (i + 1) + ' of ' + n);
+      if (!useDots) return;
       var d = document.createElement('button'); d.type = 'button'; d.className = 'slider-dot';
-      var h = sl.querySelector('h4, h3'); d.setAttribute('aria-label', 'Show ' + (h ? h.textContent : 'slide ' + (i + 1)));
+      var h = sl.querySelector('h4, h3'); d.setAttribute('aria-label', 'Show ' + (h ? h.textContent.trim() : 'item ' + (i + 1)));
       d.addEventListener('click', function () { go(i); restart(); }); dots.appendChild(d);
     });
     prev.addEventListener('click', function () { go(cur - 1); restart(); });
     next.addEventListener('click', function () { go(cur + 1); restart(); });
     t.addEventListener('keydown', function (e) {
+      if (expanded) return;
       if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
     });
     t.addEventListener('scroll', function () {
+      if (expanded) return;
       clearTimeout(settle);
-      settle = setTimeout(function () { cur = Math.min(last(), Math.round(t.scrollLeft / step())); mark(); }, 80);
+      settle = setTimeout(function () { cur = Math.min(n - 1, Math.round(t.scrollLeft / step())); mark(); }, 80);
     }, { passive: true });
-    window.addEventListener('resize', function () { go(cur); });
-    // autoplay: every `delay` ms, paused on hover / focus / touch, off-screen, hidden tab or reduced motion
-    function tick() { if (!paused && visible && !document.hidden) go(cur >= last() ? 0 : cur + 1); }
-    function restart() { clearInterval(timer); if (delay && !reduce) timer = setInterval(tick, delay); }
+    window.addEventListener('resize', function () { if (!expanded) go(cur); });
+    // "View all" turns the slider into a grid; "Show less" turns it back
+    function setAll(open) {
+      expanded = open; root.classList.toggle('is-all', open);
+      all.setAttribute('aria-expanded', String(open));
+      all.innerHTML = (open ? 'Show less' : 'View all ' + n) + ' <span class="chev" aria-hidden="true">▾</span>';
+      if (open) { clearInterval(timer); } else { go(0); restart(); }
+    }
+    if (all) {
+      setAll(false);
+      all.addEventListener('click', function () {
+        setAll(!expanded);
+        if (!expanded) root.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      });
+    }
+    // autoplay: every `delay` ms; paused on hover / focus / touch, off-screen, hidden tab, "View all" or reduced motion
+    function tick() { if (!paused && visible && !expanded && !document.hidden) go(cur >= n - 1 ? 0 : cur + 1); }
+    function restart() { clearInterval(timer); if (delay && !reduce && !expanded && n > 1) timer = setInterval(tick, delay); }
     root.addEventListener('mouseenter', function () { paused = true; });
     root.addEventListener('mouseleave', function () { paused = false; restart(); });
     root.addEventListener('focusin', function () { paused = true; });
