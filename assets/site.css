@@ -344,6 +344,7 @@
   .back-link { display: inline-flex; align-items: center; gap: .4rem; margin-bottom: 1.4rem; font-size: .9rem; font-weight: 600; color: var(--accent-ink); text-decoration: none; }
   .back-link:hover { text-decoration: underline; }
   .page-intro .work-group + .work-group { margin-top: clamp(2.5rem, 6vw, 4rem); }
+  .page-intro .work-group[id] { scroll-margin-top: 88px; }
   .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   @media (max-width: 900px) { .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 580px) { .projects-grid { grid-template-columns: 1fr; } }
