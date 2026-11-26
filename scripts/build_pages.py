@@ -50,7 +50,7 @@ def page(slug, title, desc, heading, sub, groups, back):
     nav = ''.join(
         f'      <a href="{h}" class="menu-link{" active" if h == file else ""}{" nav-extra" if h.startswith("/#") else ""}"{" aria-current=\"page\"" if h == file else ""}>{t}</a>\n'
         for h, t in [('/work/', 'Work'), ('/open-source/', 'Open source'), ('/reviews/', 'Reviews'),
-                     ('/#skills', 'Skills'), ('/#posts', 'Posts'), ('/#about', 'About'), ('/#experience', 'Experience')])
+                     ('/#skills', 'Skills'), ('/#about', 'About'), ('/#experience', 'Experience'), ('/#posts', 'Posts')])
     body = ''
     for gid, gtitle, count, label, cols in groups:
         body += f'''      <div class="work-group" id="{gid}">
