@@ -327,6 +327,20 @@
   .posts-ig { font-size: .9rem; font-weight: 600; color: var(--accent-ink); text-decoration: none; }
   .posts-ig:hover { text-decoration: underline; }
   .posts-empty { color: var(--muted); }
+  .oss-card { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(1.2rem, 3vw, 2rem); background: var(--surface-2); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: var(--radius); padding: clamp(1.2rem, 3vw, 1.8rem); align-items: center; }
+  @media (max-width: 860px) { .oss-card { grid-template-columns: 1fr; } }
+  .oss-main { display: flex; flex-direction: column; gap: .7rem; min-width: 0; }
+  .oss-head { display: flex; flex-wrap: wrap; gap: .5rem .8rem; align-items: center; }
+  .oss-badge { font-size: .74rem; font-weight: 700; color: #fff; background: #CB3837; border-radius: var(--radius); padding: .2rem .55rem; }
+  .oss-meta { font-size: .8rem; color: var(--muted); }
+  .oss-card h4 { margin: 0; font-size: 1.4rem; font-weight: 800; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: -0.02em; }
+  .oss-card p { margin: 0; color: var(--ink-2); font-size: .92rem; line-height: 1.55; }
+  .oss-term { background: #0D1117; border-radius: var(--radius); overflow: hidden; min-width: 0; box-shadow: var(--shadow-lg); }
+  .oss-cmd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .82rem; color: #E6EDF3; background: #161B22; padding: .7rem 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .oss-cmd span { color: #7EE787; }
+  .oss-term pre { margin: 0; padding: .9rem 1rem 1.1rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .74rem; line-height: 1.6; color: #C9D1D9; overflow-x: auto; }
+  .oss-term pre .r { color: #FF7B72; }
+  .oss-term pre i { font-style: normal; color: #8B949E; }
   .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   @media (max-width: 900px) { .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 580px) { .projects-grid { grid-template-columns: 1fr; } }
@@ -777,6 +791,29 @@
           </article>
 
         </div>
+      </div>
+      <div class="work-group reveal">
+        <div class="group-label"><h3>Open source</h3><span class="count">npm</span></div>
+        <article class="oss-card">
+          <div class="oss-main">
+            <div class="oss-head"><span class="oss-badge">npm package</span><span class="oss-meta">MIT · zero dependencies · Node 18+</span></div>
+            <h4>rn-16kb-check</h4>
+            <p>A CLI that checks React Native Android builds (AAB, APK, AAR) for Google Play's 16 KB page size requirement — and names the npm package behind every native library that fails, with how to fix it. Built after a client's app was rejected by Google Play for exactly this.</p>
+            <div class="p-stack"><span>Node.js</span><span>ELF parsing</span><span>ZIP / AAB</span><span>CLI</span><span>CI on macOS · Linux · Windows</span></div>
+            <div class="p-links">
+              <a href="https://www.npmjs.com/package/rn-16kb-check" target="_blank" rel="noopener">npm ↗</a>
+              <a href="https://github.com/hanif-2000/rn-16kb-check" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </div>
+          <div class="oss-term" aria-label="Example output">
+            <div class="oss-cmd"><span>$</span> npx rn-16kb-check app-release.aab</div>
+<pre><b class="r">✖ FAIL</b>  libcamerafilters.so <i>[arm64-v8a] 4 KB</i>
+        from: react-native-legacy-camera@2.1.0
+        fix:  upgrade the package
+
+<b class="r">✖ 2 of 4 64-bit libraries are not 16 KB compatible.</b></pre>
+          </div>
+        </article>
       </div>
     </div>
   </section>
