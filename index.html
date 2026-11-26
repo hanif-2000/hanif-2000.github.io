@@ -404,6 +404,17 @@
   .edu-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
   .edu-card li { display: flex; justify-content: space-between; gap: 1rem; font-size: .95rem; }
   .edu-card li span { color: var(--muted); font-size: .85rem; }
+  .edu-grid { grid-template-columns: 1.4fr 1fr; }
+  @media (max-width: 860px) { .edu-grid { grid-template-columns: 1fr; } }
+  .certs-card { grid-column: 1 / -1; }
+  .certs-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .certs-count { white-space: nowrap; font-size: .8rem; color: var(--accent-ink); background: var(--accent-soft); padding: .2rem .55rem; border-radius: var(--radius); }
+  .cert-list { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+  .cert { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem .7rem; border: 1px solid var(--line); border-radius: var(--radius); font-size: .88rem; color: inherit; text-decoration: none; background: var(--bg); }
+  a.cert:hover { border-color: var(--accent); color: var(--accent-ink); }
+  a.cert::after { content: "↗"; font-size: .75rem; color: var(--muted); }
+  .cert-role { border-color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+  .cert-role span { font-weight: 400; color: var(--muted); font-size: .8rem; }
 
   /* contact */
   .contact { background: var(--contact-bg); color: #F3F1EC; border-radius: var(--radius); padding: clamp(1.6rem, 6vw, 4.5rem); display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(2rem, 6vw, 4rem); align-items: center; }
@@ -1155,12 +1166,31 @@
           <p>Computer Software Engineering · 2020 — 2023</p>
         </div>
         <div class="edu-card">
-          <span class="label">Certifications</span>
-          <ul><li>JavaScript Basic</li><li>C Programming Language</li></ul>
-        </div>
-        <div class="edu-card">
           <span class="label">Languages</span>
           <ul><li>Hindi <span>Native</span></li><li>English <span>Full professional</span></li></ul>
+        </div>
+        <div class="edu-card certs-card">
+          <div class="certs-head">
+            <span class="label">Certifications · HackerRank</span>
+            <span class="certs-count">15 verified</span>
+          </div>
+          <a class="cert cert-role" href="https://www.hackerrank.com/certificates/cea78a44f67e" target="_blank" rel="noopener">Software Engineer <span>Role certificate</span></a>
+          <div class="cert-list">
+            <a class="cert" href="https://www.hackerrank.com/certificates/0439195a874e" target="_blank" rel="noopener">JavaScript (Intermediate)</a>
+            <a class="cert" href="https://www.hackerrank.com/certificates/305f33f7f947" target="_blank" rel="noopener">JavaScript (Basic)</a>
+            <a class="cert" href="https://www.hackerrank.com/certificates/e28b574afdf7" target="_blank" rel="noopener">Node.js (Intermediate)</a>
+            <a class="cert" href="https://www.hackerrank.com/certificates/5ae44ea67593" target="_blank" rel="noopener">Node (Basic)</a>
+            <a class="cert" href="https://www.hackerrank.com/certificates/28a72601ec8c" target="_blank" rel="noopener">React (Basic)</a>
+            <a class="cert" href="https://www.hackerrank.com/certificates/3096a2a14a46" target="_blank" rel="noopener">Rest API (Intermediate)</a>
+            <a class="cert" href="https://www.hackerrank.com/certificates/5598a8ab4302" target="_blank" rel="noopener">Problem Solving (Intermediate)</a>
+            <a class="cert" href="https://www.hackerrank.com/certificates/2a9d9f1723af" target="_blank" rel="noopener">Problem Solving (Basic)</a>
+            <span class="cert">SQL (Advanced)</span>
+            <span class="cert">SQL (Intermediate)</span>
+            <a class="cert" href="https://www.hackerrank.com/certificates/ca854906118a" target="_blank" rel="noopener">SQL (Basic)</a>
+            <a class="cert" href="https://www.hackerrank.com/certificates/3ef0f6ce787b" target="_blank" rel="noopener">CSS (Basic)</a>
+            <span class="cert">Java (Basic)</span>
+            <span class="cert">Angular (Basic)</span>
+          </div>
         </div>
       </div>
     </div>
