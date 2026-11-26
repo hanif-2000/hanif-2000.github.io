@@ -343,18 +343,27 @@
   .oss-term pre .r { color: #FF7B72; }
   .oss-term pre i { font-style: normal; color: #8B949E; }
   .oss-term pre .g { color: #7EE787; font-weight: 400; }
-  .oss-track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; }
-  .oss-track::-webkit-scrollbar { display: none; }
-  .oss-track:focus-visible { outline-offset: 4px; }
-  .oss-slide { flex: 0 0 100%; scroll-snap-align: start; min-width: 0; }
-  @media (prefers-reduced-motion: reduce) { .oss-track { scroll-behavior: auto; } }
-  .oss-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem; }
-  .oss-btn { width: 2.4rem; height: 2.4rem; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1rem; cursor: pointer; }
-  .oss-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-ink); }
-  .oss-btn:disabled { opacity: .4; cursor: default; }
-  .oss-dots { display: flex; gap: .45rem; }
-  .oss-dot { width: .55rem; height: .55rem; padding: 0; border: 0; border-radius: 2px; background: var(--line-strong); cursor: pointer; transition: width .2s ease, background .2s ease; }
-  .oss-dot[aria-current="true"] { width: 1.6rem; background: var(--accent); }
+  .slider-track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; padding: 6px 2px 28px; margin: -6px -2px -28px; scroll-padding-inline: 2px; }
+  .slider-track::-webkit-scrollbar { display: none; }
+  .slider-track:focus-visible { outline-offset: 4px; }
+  .slider-track > * { flex: 0 0 100%; scroll-snap-align: start; min-width: 0; }
+  .reviews-track > * { flex-basis: calc((100% - 2rem) / 3); }
+  @media (max-width: 900px) { .reviews-track > * { flex-basis: calc((100% - 1rem) / 2); } }
+  @media (max-width: 580px) { .reviews-track > * { flex-basis: 100%; } }
+  @media (prefers-reduced-motion: reduce) { .slider-track { scroll-behavior: auto; } }
+  .slider-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem; }
+  .slider-btn { width: 2.4rem; height: 2.4rem; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1rem; cursor: pointer; }
+  .slider-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-ink); }
+  .slider-btn:disabled { opacity: .4; cursor: default; }
+  .slider-count { min-width: 6.5rem; text-align: center; font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .slider-dots { display: flex; gap: .45rem; }
+  .slider-dot { width: .55rem; height: .55rem; padding: 0; border: 0; border-radius: 2px; background: var(--line-strong); cursor: pointer; transition: width .2s ease, background .2s ease; }
+  .slider-dot[aria-current="true"] { width: 1.6rem; background: var(--accent); }
+  .reviews-track .review blockquote { flex: 0 1 auto; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; line-clamp: 6; overflow: hidden; }
+  .reviews-track .review.open blockquote { display: block; -webkit-line-clamp: unset; line-clamp: none; }
+  .reviews-track .review h3 { margin-top: auto; }
+  .more-btn { align-self: flex-start; margin-top: -.4rem; padding: 0; border: 0; background: none; color: var(--accent-ink); font: inherit; font-size: .85rem; font-weight: 600; cursor: pointer; }
+  .more-btn:hover { text-decoration: underline; }
   .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   @media (max-width: 900px) { .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 580px) { .projects-grid { grid-template-columns: 1fr; } }
@@ -819,9 +828,9 @@
       </div>
       <div class="work-group reveal">
         <div class="group-label"><h3>Open source</h3><span class="count">4 npm packages</span></div>
-        <div class="oss-slider" aria-roledescription="carousel" aria-label="Open source packages">
-          <div class="oss-track" id="ossTrack" tabindex="0">
-          <article class="oss-card oss-slide" role="group" aria-roledescription="slide">
+        <div class="slider" data-autoplay="5000" aria-roledescription="carousel" aria-label="Open source packages">
+          <div class="slider-track" tabindex="0">
+          <article class="oss-card" role="group" aria-roledescription="slide">
           <div class="oss-main">
             <div class="oss-head"><span class="oss-badge">npm package</span><span class="oss-meta">MIT · zero dependencies · Node 18+</span></div>
             <h4>rn-16kb-check</h4>
@@ -841,7 +850,7 @@
 <b class="r">✖ 2 of 4 64-bit libraries are not 16 KB compatible.</b></pre>
           </div>
         </article>
-          <article class="oss-card oss-slide" role="group" aria-roledescription="slide">
+          <article class="oss-card" role="group" aria-roledescription="slide">
             <div class="oss-main">
               <div class="oss-head"><span class="oss-badge">npm package</span><span class="oss-meta">MIT · zero dependencies · Node 18+</span></div>
               <h4>rn-privacy-manifest-check</h4>
@@ -862,7 +871,7 @@
 <b class="r">✖ 1 missing, 1 invalid (3 native packages scanned).</b></pre>
             </div>
           </article>
-          <article class="oss-card oss-slide" role="group" aria-roledescription="slide">
+          <article class="oss-card" role="group" aria-roledescription="slide">
             <div class="oss-main">
               <div class="oss-head"><span class="oss-badge">npm package</span><span class="oss-meta">MIT · zero dependencies · Node 18+</span></div>
               <h4>eas-config-check</h4>
@@ -882,7 +891,7 @@
 <b class="r">✖ 3 errors · 0 warnings</b></pre>
             </div>
           </article>
-          <article class="oss-card oss-slide" role="group" aria-roledescription="slide">
+          <article class="oss-card" role="group" aria-roledescription="slide">
             <div class="oss-main">
               <div class="oss-head"><span class="oss-badge">npm package</span><span class="oss-meta">MIT · zero dependencies · React 16.8+</span></div>
               <h4>use-timezone-overlap</h4>
@@ -906,13 +915,11 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
             </div>
           </article>
           </div>
-          <div class="oss-nav">
-            <button type="button" class="oss-btn" id="ossPrev" aria-label="Previous package">←</button>
-            <div class="oss-dots" id="ossDots"></div>
-            <button type="button" class="oss-btn" id="ossNext" aria-label="Next package">→</button>
+          <div class="slider-nav">
+            <button type="button" class="slider-btn" data-dir="-1" aria-label="Previous">←</button>
+            <div class="slider-dots"></div>
+            <button type="button" class="slider-btn" data-dir="1" aria-label="Next">→</button>
           </div>
-        </div>
-          </article>
         </div>
       </div>
     </div>
@@ -928,11 +935,12 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
       <div class="reviews-top reveal">
         <span>Top Rated Plus · 100% Job Success on Upwork</span>
       </div>
-      <div class="reviews-grid reveal" data-limit="6" data-more="Show all {n} reviews">
+      <div class="slider reveal" data-autoplay="5000" aria-roledescription="carousel" aria-label="Client reviews">
+      <div class="slider-track reviews-track" tabindex="0">
 
         <!-- Review card. Written review -> <blockquote>; stars only -> <p class="summary">.
              Desktop grid is 6 columns: .featured = 4, default = 2, .half = 3. Keep every row summing to 6. -->
-        <article class="review featured">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <blockquote>"I want to thank Hanif for being part of our team and being a key member on completing a complex project we worked together for months. Hanif has great skills In React Native, but also contributes as a team member being proactive communicate, and available in order for the project to be completed ahead of expectations. I would very much recommend Hanif either if you need a one person job or to participate as a team member. Thanks again Hanif."</blockquote>
           <h3>Finish React Native application &amp; ongoing work</h3>
@@ -950,7 +958,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Subhash J</b> · India</span></div>
         </article>
 
-        <article class="review featured">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <h3>App developer — Android + iOS · Red Pocket Mobile</h3>
           <div class="when">Apr 1, 2022 – Mar 10, 2023 · ~11 months · 1,916 hrs</div>
@@ -977,7 +985,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Ayesha Siddiqua</b> · Bangladesh</span></div>
         </article>
 
-        <article class="review featured">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <blockquote>"Great experience working with Hanif Mohammad. He successfully handled web scraping in Python and integrated the data smoothly into a React.js application. The code was clean, well-structured, and delivered on time. Communication was clear throughout the project, and he understood the requirements very well. I would definitely recommend him and look forward to working together again."</blockquote>
           <h3>Full-stack developer — Python scraping into a React.js app</h3>
@@ -986,7 +994,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Ayesha Siddiqua</b> · Bangladesh</span></div>
         </article>
 
-        <article class="review featured">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <blockquote>"M. Hanif did an excellent job fixing the issues on my website. He quickly identified the problems, communicated clearly throughout the process, and delivered solutions efficiently. The site is now running smoothly, faster, and exactly as expected. Very knowledgeable, reliable, and easy to work with. Highly recommended for anyone needing website troubleshooting or improvements."</blockquote>
           <h3>Website troubleshooting &amp; speed fixes</h3>
@@ -1004,7 +1012,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Joseph Jimenez</b> · US</span></div>
         </article>
 
-        <article class="review half">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <blockquote>"Hanif was fantastic to work with. Very communicative and honest. He was very kind and easy to work with and I would recommend him to anyone trying to build an app!"</blockquote>
           <h3>Mobile app MVP</h3>
@@ -1013,7 +1021,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Kyan Louie</b> · US</span></div>
         </article>
 
-        <article class="review half">
+        <article class="review">
           <span class="stars" aria-label="4.7 out of 5 stars">★★★★<span class="star-dim">★</span> <span class="score">4.7</span></span>
           <blockquote>"Hanif was overall great to work with. Although there were some unexpected bumps he completed the task and the App is now working on the app store. I will use Hanif for future work and as a referral for friends."</blockquote>
           <h3>Zenbase mobile app update</h3>
@@ -1022,7 +1030,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Jessie Freelander</b> · Zenbase · US</span></div>
         </article>
 
-        <article class="review half">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <blockquote>"Hanif was amazing to work with — highly recommend!"</blockquote>
           <h3>Fintech app testing</h3>
@@ -1031,7 +1039,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Grant Ackerman</b></span></div>
         </article>
 
-        <article class="review half">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <blockquote>"Great at Claude design and made great suggestion."</blockquote>
           <h3>Front-end &amp; UX enhancement — medical app</h3>
@@ -1040,7 +1048,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Charl Garbaroli</b> · FitCheck Global Inc. · US</span></div>
         </article>
 
-        <article class="review half">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <h3>Google Play Error</h3>
           <div class="when">Jul 21 – Aug 22, 2026 · 30 hrs</div>
@@ -1049,7 +1057,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Jeremiah Booker</b> · Atsap, LLC · US</span></div>
         </article>
 
-        <article class="review half">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <h3>Cocos Creator IAP &amp; Singular ad-tracking bug</h3>
           <div class="when">Jun 26 – 30, 2026 · 5 days</div>
@@ -1058,7 +1066,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Alex Kameda</b> · DayOne LLC · Japan</span></div>
         </article>
 
-        <article class="review half">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <h3>React Native front end</h3>
           <div class="when">Nov 11 – 14, 2023 · 3 hrs</div>
@@ -1067,7 +1075,7 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Suk Jo Kang</b> · Education Marketing Group · New Zealand</span></div>
         </article>
 
-        <article class="review half">
+        <article class="review">
           <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
           <h3>Machine learning &amp; AI for a travel application</h3>
           <div class="when">May 28 – Jun 27, 2023 · 1 month</div>
@@ -1076,6 +1084,12 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
           <div class="who"><span><b>Joshua-Daniel Ekechukwu</b> · St. Vincent &amp; Grenadines</span></div>
         </article>
 
+      </div>
+        <div class="slider-nav">
+          <button type="button" class="slider-btn" data-dir="-1" aria-label="Previous reviews">←</button>
+          <span class="slider-count" aria-live="polite"></span>
+          <button type="button" class="slider-btn" data-dir="1" aria-label="Next reviews">→</button>
+        </div>
       </div>
     </div>
   </section>
@@ -1522,29 +1536,64 @@ useTimezoneOverlap({ timeZone: <b class="g">'Asia/Kolkata'</b>,
     }
     tick(); setInterval(tick, 30000);
   })();
-  (function () {
-    var t = document.getElementById('ossTrack'); if (!t) return;
-    var slides = t.querySelectorAll('.oss-slide'), dots = document.getElementById('ossDots');
-    var prev = document.getElementById('ossPrev'), next = document.getElementById('ossNext'), cur = 0;
-    var go = function (i) { i = Math.max(0, Math.min(slides.length - 1, i)); cur = i; mark(); t.scrollTo({ left: slides[i].offsetLeft - t.offsetLeft }); };
-    slides.forEach(function (sl, i) {
-      sl.setAttribute('aria-label', (i + 1) + ' of ' + slides.length);
-      var d = document.createElement('button'); d.type = 'button'; d.className = 'oss-dot';
-      d.setAttribute('aria-label', 'Show ' + sl.querySelector('h4').textContent);
-      d.addEventListener('click', function () { go(i); }); dots.appendChild(d);
+  document.querySelectorAll('.reviews-track .review blockquote').forEach(function (q) {
+    if (q.scrollHeight <= q.clientHeight + 2) return;
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'more-btn';
+    b.textContent = 'Read more'; b.setAttribute('aria-expanded', 'false');
+    b.addEventListener('click', function () {
+      var open = q.parentNode.classList.toggle('open');
+      b.textContent = open ? 'Show less' : 'Read more'; b.setAttribute('aria-expanded', String(open));
     });
-    var timer;
-    function sync() { clearTimeout(timer); timer = setTimeout(function () { cur = Math.round(t.scrollLeft / Math.max(1, t.clientWidth + 16)); mark(); }, 80); }
+    q.insertAdjacentElement('afterend', b);
+  });
+  document.querySelectorAll('.slider').forEach(function (root) {
+    var t = root.querySelector('.slider-track'), slides = t.children, n = slides.length;
+    var dots = root.querySelector('.slider-dots'), count = root.querySelector('.slider-count');
+    var prev = root.querySelector('[data-dir="-1"]'), next = root.querySelector('[data-dir="1"]');
+    var cur = 0, timer, settle, paused = false, visible = false;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var delay = +root.getAttribute('data-autoplay') || 0;
+    function step() { return n > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : t.clientWidth; }
+    function perView() { return Math.max(1, Math.round((t.clientWidth + 16) / step())); }
+    function last() { return Math.max(0, n - perView()); }
     function mark() {
-      dots.querySelectorAll('.oss-dot').forEach(function (d, i) { d.setAttribute('aria-current', i === cur ? 'true' : 'false'); });
-      prev.disabled = cur === 0; next.disabled = cur === slides.length - 1;
+      var pv = perView();
+      if (dots) dots.querySelectorAll('.slider-dot').forEach(function (d, i) { d.setAttribute('aria-current', i === cur ? 'true' : 'false'); });
+      if (count) count.textContent = (pv > 1 ? (cur + 1) + '–' + Math.min(n, cur + pv) : (cur + 1)) + ' of ' + n;
+      prev.disabled = cur === 0; next.disabled = cur >= last();
     }
-    prev.addEventListener('click', function () { go(cur - 1); });
-    next.addEventListener('click', function () { go(cur + 1); });
-    t.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); } });
-    t.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', sync); mark();
-  })();
+    function go(i) { cur = Math.max(0, Math.min(last(), i)); mark(); t.scrollTo({ left: slides[cur].offsetLeft - slides[0].offsetLeft }); }
+    Array.prototype.forEach.call(slides, function (sl, i) {
+      sl.setAttribute('aria-label', (i + 1) + ' of ' + n);
+      if (!dots) return;
+      var d = document.createElement('button'); d.type = 'button'; d.className = 'slider-dot';
+      var h = sl.querySelector('h4, h3'); d.setAttribute('aria-label', 'Show ' + (h ? h.textContent : 'slide ' + (i + 1)));
+      d.addEventListener('click', function () { go(i); restart(); }); dots.appendChild(d);
+    });
+    prev.addEventListener('click', function () { go(cur - 1); restart(); });
+    next.addEventListener('click', function () { go(cur + 1); restart(); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+    });
+    t.addEventListener('scroll', function () {
+      clearTimeout(settle);
+      settle = setTimeout(function () { cur = Math.min(last(), Math.round(t.scrollLeft / step())); mark(); }, 80);
+    }, { passive: true });
+    window.addEventListener('resize', function () { go(cur); });
+    // autoplay: every `delay` ms, paused on hover / focus / touch, off-screen, hidden tab or reduced motion
+    function tick() { if (!paused && visible && !document.hidden) go(cur >= last() ? 0 : cur + 1); }
+    function restart() { clearInterval(timer); if (delay && !reduce) timer = setInterval(tick, delay); }
+    root.addEventListener('mouseenter', function () { paused = true; });
+    root.addEventListener('mouseleave', function () { paused = false; restart(); });
+    root.addEventListener('focusin', function () { paused = true; });
+    root.addEventListener('focusout', function () { paused = false; });
+    t.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+    t.addEventListener('touchend', function () { setTimeout(function () { paused = false; restart(); }, 4000); }, { passive: true });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }, { threshold: 0.4 }).observe(root);
+    else visible = true;
+    mark(); restart();
+  });
   (function () {
     var b = document.getElementById('toTop'); if (!b) return;
     var f = function () { b.classList.toggle('show', window.scrollY > window.innerHeight * 1.2); };
