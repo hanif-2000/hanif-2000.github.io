@@ -16,7 +16,8 @@
 <meta name="twitter:image" content="https://hanif-2000.github.io/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F7F9F6">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23001E00'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' fill='%23F7F5F0' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -341,6 +342,12 @@
   .oss-term pre { margin: 0; padding: .9rem 1rem 1.1rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .74rem; line-height: 1.6; color: #C9D1D9; overflow-x: auto; }
   .oss-term pre .r { color: #FF7B72; }
   .oss-term pre i { font-style: normal; color: #8B949E; }
+  .oss-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+  @media (max-width: 900px) { .oss-grid { grid-template-columns: 1fr; } }
+  .oss-mini { display: flex; flex-direction: column; gap: .7rem; min-width: 0; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem; }
+  .oss-mini h4 { margin: 0; font-size: 1.02rem; font-weight: 800; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+  .oss-mini p { margin: 0; color: var(--ink-2); font-size: .88rem; line-height: 1.55; flex: 1; }
+  .oss-mini .oss-cmd { border-radius: var(--radius); }
   .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   @media (max-width: 900px) { .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 580px) { .projects-grid { grid-template-columns: 1fr; } }
@@ -804,7 +811,7 @@
         </div>
       </div>
       <div class="work-group reveal">
-        <div class="group-label"><h3>Open source</h3><span class="count">npm</span></div>
+        <div class="group-label"><h3>Open source</h3><span class="count">4 npm packages</span></div>
         <article class="oss-card">
           <div class="oss-main">
             <div class="oss-head"><span class="oss-badge">npm package</span><span class="oss-meta">MIT · zero dependencies · Node 18+</span></div>
@@ -825,6 +832,41 @@
 <b class="r">✖ 2 of 4 64-bit libraries are not 16 KB compatible.</b></pre>
           </div>
         </article>
+        <div class="oss-grid">
+          <article class="oss-mini">
+            <div class="oss-head"><span class="oss-badge">npm</span><span class="oss-meta">MIT · zero dependencies</span></div>
+            <h4>rn-privacy-manifest-check</h4>
+            <p>Finds which React Native packages use Apple's required reason APIs and checks that your PrivacyInfo.xcprivacy declares them — before App Store Connect emails you about it.</p>
+            <div class="oss-cmd"><span>$</span> npx rn-privacy-manifest-check</div>
+            <div class="p-stack"><span>iOS</span><span>Privacy manifest</span><span>CLI</span></div>
+            <div class="p-links">
+              <a href="https://www.npmjs.com/package/rn-privacy-manifest-check" target="_blank" rel="noopener">npm ↗</a>
+              <a href="https://github.com/hanif-2000/rn-privacy-manifest-check" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+          <article class="oss-mini">
+            <div class="oss-head"><span class="oss-badge">npm</span><span class="oss-meta">MIT · zero dependencies</span></div>
+            <h4>eas-config-check</h4>
+            <p>Catches Expo / EAS config mismatches — projectId, slug, bundle IDs, updates URL, eas.json profiles and native projects — before they break a build, an update or push notifications.</p>
+            <div class="oss-cmd"><span>$</span> npx eas-config-check</div>
+            <div class="p-stack"><span>Expo</span><span>EAS</span><span>CLI</span></div>
+            <div class="p-links">
+              <a href="https://www.npmjs.com/package/eas-config-check" target="_blank" rel="noopener">npm ↗</a>
+              <a href="https://github.com/hanif-2000/eas-config-check" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+          <article class="oss-mini">
+            <div class="oss-head"><span class="oss-badge">npm</span><span class="oss-meta">MIT · zero dependencies</span></div>
+            <h4>use-timezone-overlap</h4>
+            <p>React / React Native hook that shows your working hours in the visitor's time zone — online now, today's window and the overlap. Handles DST and half-hour offsets.</p>
+            <div class="oss-cmd"><span>$</span> npm i use-timezone-overlap</div>
+            <div class="p-stack"><span>React</span><span>React Native</span><span>Hook</span></div>
+            <div class="p-links">
+              <a href="https://www.npmjs.com/package/use-timezone-overlap" target="_blank" rel="noopener">npm ↗</a>
+              <a href="https://github.com/hanif-2000/use-timezone-overlap" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -1210,7 +1252,7 @@
           <div class="tzw" id="tzw" aria-live="polite">
             <div class="tz-row"><span class="tz-k">My time</span><span class="tz-v" id="tzMe">—</span><span class="tz-z">Merta · IST</span></div>
             <div class="tz-row" id="tzYouRow"><span class="tz-k">Your time</span><span class="tz-v" id="tzYou">—</span><span class="tz-z" id="tzYouZ"></span></div>
-            <p class="tz-note" id="tzNote">I usually work 10:00 – 22:00 IST and reply within the same day.</p>
+            <p class="tz-note" id="tzNote"><b>● Available 24/7</b> — message me any time, in any time zone.</p>
           </div>
         </div>
         <div class="contact-side">
@@ -1417,27 +1459,17 @@
   (function () {
     var me = document.getElementById('tzMe'); if (!me) return;
     var you = document.getElementById('tzYou'), youZ = document.getElementById('tzYouZ'), row = document.getElementById('tzYouRow'), note = document.getElementById('tzNote');
-    var HOME = 'Asia/Kolkata', START = 10, END = 22; // working hours in IST
+    var HOME = 'Asia/Kolkata';
     var userTZ; try { userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
     var fmt = function (tz) { return new Intl.DateTimeFormat([], { hour: 'numeric', minute: '2-digit', timeZone: tz }).format(new Date()); };
-    var hourIn = function (tz, d) { return +new Intl.DateTimeFormat('en-GB', { hour: '2-digit', hour12: false, timeZone: tz }).format(d); };
     var sameZone = !userTZ || new Date().toLocaleString('en-US', { timeZone: userTZ }) === new Date().toLocaleString('en-US', { timeZone: HOME });
-    function windowInYourTime() {
-      // find the IST 10:00 and 22:00 instants today and render them in the visitor zone
-      var now = new Date(), parts = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: HOME }).format(now).split(':');
-      var base = new Date(now.getTime() - ((+parts[0] % 24) * 60 + (+parts[1])) * 60000 - now.getSeconds() * 1000 - now.getMilliseconds());
-      var f = new Intl.DateTimeFormat([], { hour: 'numeric', minute: '2-digit', timeZone: userTZ });
-      return f.format(new Date(base.getTime() + START * 3600000)) + ' – ' + f.format(new Date(base.getTime() + END * 3600000));
-    }
     function tick() {
       try {
         me.textContent = fmt(HOME);
-        var h = hourIn(HOME, new Date()), on = h >= START && h < END;
         if (sameZone) { row.style.display = 'none'; }
         else {
           you.textContent = fmt(userTZ);
           youZ.textContent = userTZ.split('/').pop().replace(/_/g, ' ');
-          note.innerHTML = (on ? '<b>● Online now.</b> ' : '') + 'My working hours are <b>' + windowInYourTime() + '</b> your time.';
         }
       } catch (e) {}
     }
