@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Build the "View all" pages (work.html, open-source.html, reviews.html) from index.html.
+"""Build the "View all" pages (/work/, /open-source/, /reviews/) from index.html.
 
 The cards on each page are copied from the matching slider on the home page, so the
 pages never drift from it. Run after editing a slider on index.html:
 
     python3 scripts/build_pages.py
+
+Pages use root-relative paths (/assets/...), so they work at the site root
+(hanif-2000.github.io or a custom domain).
 """
 import re
 from pathlib import Path
@@ -23,7 +26,8 @@ def slider_items(label):
     for m in re.compile(r'<div\b|</div>').finditer(index, k):
         depth += 1 if m.group() == '<div' else -1
         if depth == 0:
-            return index[body_start:m.start()].strip('\n')
+            html = index[body_start:m.start()].strip('\n')
+            return re.sub(r'(src|href|srcset)="assets/', r'\1="/assets/', html)
     raise ValueError(label)
 
 
@@ -41,10 +45,12 @@ NAV_JS = block(r"  \(function \(\) \{\n    var nav = document\.getElementById\('
 THEME_JS = block(r"  \(function \(\) \{\n    var b = document\.getElementById\('themeBtn'\).*?\n  \}\)\(\);\n")
 
 
-def page(file, title, desc, heading, sub, groups, back):
+def page(slug, title, desc, heading, sub, groups, back):
+    file = f'/{slug}/'
     nav = ''.join(
-        f'      <a href="{h}" class="menu-link{" active" if h == file else ""}"{" aria-current=\"page\"" if h == file else ""}>{t}</a>\n'
-        for h, t in [('work.html', 'Work'), ('open-source.html', 'Open source'), ('reviews.html', 'Reviews')])
+        f'      <a href="{h}" class="menu-link{" active" if h == file else ""}{" nav-extra" if h.startswith("/#") else ""}"{" aria-current=\"page\"" if h == file else ""}>{t}</a>\n'
+        for h, t in [('/work/', 'Work'), ('/open-source/', 'Open source'), ('/reviews/', 'Reviews'),
+                     ('/#skills', 'Skills'), ('/#posts', 'Posts'), ('/#about', 'About'), ('/#experience', 'Experience')])
     body = ''
     for gid, gtitle, count, label, cols in groups:
         body += f'''      <div class="work-group" id="{gid}">
@@ -61,9 +67,9 @@ def page(file, title, desc, heading, sub, groups, back):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} — Hanif Mohammad</title>
 <meta name="description" content="{desc}">
-<link rel="canonical" href="{SITE}{file}">
+<link rel="canonical" href="{SITE}{slug}/">
 <meta property="og:type" content="website">
-<meta property="og:url" content="{SITE}{file}">
+<meta property="og:url" content="{SITE}{slug}/">
 <meta property="og:title" content="{title} — Hanif Mohammad">
 <meta property="og:description" content="{desc}">
 <meta property="og:image" content="{SITE}assets/og.jpg">
@@ -74,7 +80,7 @@ def page(file, title, desc, heading, sub, groups, back):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="/assets/site.css">
 {THEME_EARLY}
 </head>
 <body>
@@ -82,10 +88,10 @@ def page(file, title, desc, heading, sub, groups, back):
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a href="./" class="brand"><img class="brand-avatar" src="assets/avatar.jpg" alt="" width="36" height="36">Hanif Mohammad</a>
+    <a href="/" class="brand"><img class="brand-avatar" src="/assets/avatar.jpg" alt="" width="36" height="36">Hanif Mohammad</a>
     <nav class="nav-links" aria-label="Primary">
 {nav}      {THEME_BTN}
-      <a href="./#contact" class="nav-cta">Let's talk</a>
+      <a href="/#contact" class="nav-cta">Let's talk</a>
     </nav>
   </div>
 </header>
@@ -110,18 +116,20 @@ def page(file, title, desc, heading, sub, groups, back):
 </body>
 </html>
 '''
-    (ROOT / file).write_text(html)
-    print('wrote', file)
+    out = ROOT / slug / 'index.html'
+    out.parent.mkdir(exist_ok=True)
+    out.write_text(html)
+    print('wrote', out.relative_to(ROOT))
 
 
-page('work.html', 'All projects', 'Mobile apps and web platforms Hanif Mohammad has shipped to production.',
+page('work', 'All projects', 'Mobile apps and web platforms Hanif Mohammad has shipped to production.',
      'All projects', 'Apps and platforms <i>shipped to production.</i>',
      [('featured', 'Featured projects', 'Sorted by downloads', 'Featured projects', 1),
       ('mobile', 'More mobile apps', '6 shipped · 2 live on the stores', 'More mobile apps', 3),
-      ('web', 'Web apps', '7 live', 'Web apps', 3)], './#work')
-page('open-source.html', 'Open source', 'Open-source npm packages by Hanif Mohammad for React Native and Expo developers.',
+      ('web', 'Web apps', '7 live', 'Web apps', 3)], '/#work')
+page('open-source', 'Open source', 'Open-source npm packages by Hanif Mohammad for React Native and Expo developers.',
      'Open source', 'npm packages for <i>React Native &amp; Expo.</i>',
-     [('packages', 'Packages', '4 on npm · MIT · zero dependencies', 'Open source packages', 1)], './#work')
-page('reviews.html', 'Client reviews', 'Client reviews for Hanif Mohammad on Upwork — Top Rated Plus, 100% Job Success.',
+     [('packages', 'Packages', '4 on npm · MIT · zero dependencies', 'Open source packages', 1)], '/#work')
+page('reviews', 'Client reviews', 'Client reviews for Hanif Mohammad on Upwork — Top Rated Plus, 100% Job Success.',
      'Client reviews', 'What clients say <i>on Upwork.</i>',
-     [('all', 'All reviews', 'Top Rated Plus · 100% Job Success', 'Client reviews', 3)], './#reviews')
+     [('all', 'All reviews', 'Top Rated Plus · 100% Job Success', 'Client reviews', 3)], '/#reviews')

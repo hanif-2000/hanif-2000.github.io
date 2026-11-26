@@ -87,6 +87,8 @@
   .nav-links a.menu-link.active::after { transform: scaleX(1); }
   .nav-cta { padding: .5rem .95rem; border-radius: var(--radius); background: var(--btn-bg); color: var(--btn-ink) !important; font-weight: 500; }
   .nav-cta:hover { background: var(--accent); }
+  .nav-links a, .brand { white-space: nowrap; }
+  @media (max-width: 1040px) { .nav-links a.nav-extra { display: none; } }
   @media (max-width: 720px) { .nav-links a.menu-link { display: none; } }
 
   /* buttons */
