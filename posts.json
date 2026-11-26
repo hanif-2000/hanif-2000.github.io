@@ -18,5 +18,15 @@
     "image": "assets/posts/2026-11-25-red-pocket.jpg",
     "alt": "Red Pocket Mobile project card: 50K+ downloads, ratings, key features and two app screenshots",
     "instagram": "https://www.instagram.com/p/DgKzSHEOiig/"
+  },
+  {
+    "id": "2026-11-26-npm-packages",
+    "date": "2026-11-26",
+    "type": "Open source",
+    "title": "3 new npm packages for React Native & Expo",
+    "text": "rn-privacy-manifest-check finds missing iOS privacy manifest entries, eas-config-check catches Expo / EAS config mismatches, and use-timezone-overlap shows your working hours in a client's time zone. Free, MIT-licensed, zero dependencies.",
+    "image": "assets/posts/2026-11-26-npm-packages.jpg",
+    "alt": "Card listing three open-source npm packages — rn-privacy-manifest-check, eas-config-check and use-timezone-overlap — with their install commands",
+    "instagram": "https://www.instagram.com/p/DgMPxjoOyA3/"
   }
 ]
